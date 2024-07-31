@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apna PG</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        #search-container {
+            text-align: center;
+            margin: 2em 0;
+        }
+        #search-section {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1em;
+            background: #f1f1f1;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        input[type="text"] {
+            padding: 0.5em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 0.5em 1em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 1em;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #results {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .pg-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .pg-item img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        #error-message {
+            color: #FF0000;
+            text-align: center;
+            margin: 1em 0;
+        }
+        .details-button {
+            display: inline-block;
+            margin-top: 1em;
+            padding: 0.5em 1em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .details-button:hover {
+            background-color: #45a049;
+        }
+        .pg-section {
+            margin: 2em;
+        }
+        .pg-section h2 {
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Apna PG .<i>com</i></h1>
+        <p>Find Excellence rooms near you</p>
+    </header>
+   
+    <main>
+        <section id="search-container">
+            <div id="search-section">
+                <input type="text" id="location-input" placeholder="Enter your location">
+                <button onclick="searchPG()">Search</button>
+                <div id="error-message"></div>
+            </div>
+        </section>
+       
+        <section id="results-section">
+            <div id="results"></div>
+        </section>
+    </main>
+   
+    <script>
+        // Predefined list of supported locations
+        const supportedLocations = ['Gaddopur', 'Shantipuram', 'Phaphamau'];
+       
+        // Sample PG data with static detail page links
+        const pgData = {
+            'Gaddopur': [
+                { name: 'PG Room 1 <BR> Best house in gaddopur', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMFxd_khxWF2iyYGxw0arDJMs8cd6qKpX5vSHl6pcnzfUwrmo1OLtZOWRj&s=10', detailPage: 'https://ssybrand.github.io/Gaddopur1-flat/' },
+                { name: 'PG Room 2', image: 'https://via.placeholder.com/200', detailPage: 'gaddopur_pg2.html' },
+                { name: 'PG Room 3', image: 'https://via.placeholder.com/200', detailPage: 'gaddopur_pg3.html' }
+            ],
+            'Shantipuram': [
+                { name: 'PG Room 4', image: 'https://via.placeholder.com/200', detailPage: 'shantipuram_pg1.html' },
+                { name: 'PG Room 5', image: 'https://via.placeholder.com/200', detailPage: 'shantipuram_pg2.html' }
+            ],
+            'Phaphamau': [
+                { name: 'PG Room 6', image: 'https://via.placeholder.com/200', detailPage: 'phaphamau_pg1.html' }
+            ]
+        };
+
+        function searchPG() {
+            const input = document.getElementById('location-input').value.trim();
+            const results = document.getElementById('results');
+            const errorMessage = document.getElementById('error-message');
+           
+            // Clear previous results and error message
+            results.innerHTML = '';
+            errorMessage.innerHTML = '';
+           
+            // Check if the location is supported
+            if (!supportedLocations.includes(input)) {
+                errorMessage.innerHTML = 'Location not supported. Please try one of the following: ' + supportedLocations.join(', ') + '.';
+                return;
+            }
+           
+            // Get data for the location
+            const data = pgData[input];
+           
+            if (!data || data.length === 0) {
+                errorMessage.innerHTML = 'No PG rooms available for this location. Please check back later.';
+            } else {
+                const section = document.createElement('div');
+                section.className = 'pg-section';
+                section.innerHTML = `<h2>${input}</h2>`;
+                data.forEach(pg => {
+                    const pgItem = document.createElement('div');
+                    pgItem.className = 'pg-item';
+                    pgItem.innerHTML = `
+                        <img src="${pg.image}" alt="${pg.name}">
+                        <h3>${pg.name}</h3>
+                        <a href="${pg.detailPage}" class="details-button">Check Details</a>
+                    `;
+                    section.appendChild(pgItem);
+                });
+                results.appendChild(section);
+            }
+        }
+    </script>
+    <hr color="yellow" size="7">
+    <center>
+        <font color="red"><strong>About Apna PG . COM</strong></font><br><br>
+        Apna PG is your go-to platform for finding the perfect rental home in your area. We help you discover high-quality PG rooms and accommodation options without any brokerage charges. Whether you're looking for a cozy room or a comfortable place to stay, Apna PG connects you with available options near you, ensuring a hassle-free search and a great rental experience.
+        <br><br>
+        Hindi:
+        अपना पीजी आपके क्षेत्र में आदर्श किराए का घर खोजने के लिए आपका सबसे अच्छा मंच है। हम आपको बिना किसी ब्रोकर शुल्क के उच्च गुणवत्ता वाले पीजी रूम और आवास विकल्पों की खोज में मदद करते हैं। चाहे आप एक आरामदायक कमरे की तलाश में हों या एक सुविधाजनक स्थान की खोज में हों, अपना पीजी आपके आस-पास उपलब्ध विकल्पों से आपको जोड़ता है, जिससे आपका खोज का अनुभव सहज और उत्कृष्ट हो.
+    </center>
+</body>
+</html>
+
+
+--
+ Cma Sandeep Kumar 
+
+Mob. No. 9140594473
+
+Vineeta Hospital Pvt Ltd 
+
+10-3 A By Pass Road Phaphamau Allahabad
+211013
+
